@@ -1,0 +1,23 @@
+{
+  "name": "valentino-color-columns",
+  "version": "1.0.0",
+  "description": "valentinoConti RandLabs challenge app",
+  "author": "valentinoConti",
+  "homepage": "https://valentinoconti.github.io/colorColumns",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --out-dir docs --public-url ./",
+    "test": "./node_modules/.bin/jest --coverage"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.14",
+    "@types/react-dom": "^18.0.5",
+    "parcel": "^2.6.2",
+    "process": "^0.11.10"
+  },
+  "license": "MIT"
+}
