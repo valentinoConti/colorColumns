@@ -1,0 +1,30 @@
+#playScreen {
+  display: flex;
+  width: 100%;
+  background-color: #252525;
+  justify-content: center;
+
+  #game-map-container {
+    display: flex;
+    flex-direction: row;
+
+    position: absolute;
+    bottom: 40px;
+    border: 1px solid black;
+
+    .column {
+      flex-direction: column;
+    }
+  
+    .tile {
+      position: relative;
+      width: 99px;
+      height: 99px;
+      border: 2px solid black;
+
+      &-overlap {
+        height: 99px;
+      }
+    }
+  }
+}

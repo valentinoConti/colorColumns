@@ -1,0 +1,30 @@
+#root {
+  justify-content: center;
+  display: flex;
+}
+
+#app-container {
+  display: flex;
+  position: relative;
+
+  width: 800px;
+  height: 800px;
+  border: 1px solid black;
+  background: linear-gradient(90deg, blue, purple, red, gold, green);
+
+  h1 {
+    text-shadow: 4px 4px 6px black;
+    color: white;
+  }
+
+  button {
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 2px 2px 2px black;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0px 0px 2px black;
+    }
+  }
+}
