@@ -4,9 +4,18 @@
   background-color: #252525;
   justify-content: center;
 
+  #back-button {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 120px;
+    height: 40px;
+  }
+
   #game-map-container {
     display: flex;
     flex-direction: row;
+    touch-action: manipulation;
 
     position: absolute;
     bottom: 40px;
@@ -18,13 +27,61 @@
   
     .tile {
       position: relative;
-      width: 99px;
-      height: 99px;
+      width: 100px;
+      height: 100px;
+      box-sizing: border-box;
       border: 2px solid black;
 
       &-overlap {
-        height: 99px;
+        height: 96px;
       }
     }
   }
+}
+
+#info-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 110px;
+
+  background-color: white;
+  border-radius: 8px;
+  height: 100px;
+
+  transition: all 0.5s ease-in;
+  #info {
+    transition: all 0.25s ease-in;
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-size: 26px;
+      text-align: center;
+      &:nth-child(2) {
+        font-size: 22px;
+      }
+    }
+  }
+
+}
+
+#timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  right: 10px;
+  top: 10px;
+
+  width: 60px;
+  height: 40px;
+  background-color: black;
+  border-radius: 6px;
+  text-align: center;
+
+  span { font-size: 20px }
 }

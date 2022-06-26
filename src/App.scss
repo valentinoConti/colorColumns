@@ -13,8 +13,13 @@
   background: linear-gradient(90deg, blue, purple, red, gold, green);
 
   h1 {
+    user-select: none;
     text-shadow: 4px 4px 6px black;
     color: white;
+  }
+
+  span {
+    user-select: none;
   }
 
   button {

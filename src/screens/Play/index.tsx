@@ -1,18 +1,25 @@
-import { Fragment, useEffect, useState } from "react";
+import { useState } from "react";
+import { InfoContainer } from "./InfoContainer";
+import { Timer } from "./Timer";
+import { getColourMap, winningMap } from "./utils";
 import "./Play.scss";
 
 type Position = number[];
 type Positions = Position[];
-type Color = "red" | "green" | "blue" | "purple" | "yellow" | "white" | "gray";
+const playableColors = ["red", "green", "blue", "yellow", "purple"];
 
 interface IPlayProps {
   setScreen: (screen: string) => void;
 }
 
 export const Play = ({ setScreen }: IPlayProps) => {
-  const [playMap, setPlayMap] = useState(colourMap());
+  const [playMap, setPlayMap] = useState(getColourMap());
   const [moving, setMoving] = useState<Position>();
   const [possibleMovements, setPossibleMovements] = useState<Positions>();
+  const [win, setWin] = useState(false);
+  const [lose, setLose] = useState(false);
+
+  const checkWin = (stringMap) => stringMap === winningMap && setWin(true);
 
   const handleTileClick = (X: number, Y: number) => {
     // If pressed a bottom tile or a white tile, do nothing.
@@ -24,18 +31,31 @@ export const Play = ({ setScreen }: IPlayProps) => {
 
     // Register possible movements
     const movements: Positions = [];
+    // Can go right?
     if (playMap[X + 1]?.[Y] === "white") {
-      movements.push([X + 1, Y]);
+      if (X + 1 < 5) {
+        movements.push([X + 1, Y]);
+      } else {
+        const allColorsButThis = playableColors.filter((color) => color !== playMap[X][Y]);
+        if (!playMap[X + 1].some((color) => allColorsButThis.includes(color))) {
+          movements.push([X + 1, Y]);
+        }
+      }
     }
+    // Can go left?
     if (playMap[X - 1]?.[Y] === "white") {
-      movements.push([X - 1, Y]);
+      if (X - 1 < 5) {
+        movements.push([X - 1, Y]);
+      } else {
+        const allColorsButThis = playableColors.filter((color) => color !== playMap[X][Y]);
+        if (!playMap[X - 1].some((color) => allColorsButThis.includes(color))) {
+          movements.push([X - 1, Y]);
+        }
+      }
     }
-    if (playMap[X][Y + 1] === "white") {
-      movements.push([X, Y + 1]);
-    }
-    if (playMap[X][Y - 1] === "white") {
-      movements.push([X, Y - 1]);
-    }
+    // Can go down? and up?
+    if (playMap[X][Y + 1] === "white") movements.push([X, Y + 1]);
+    if (playMap[X][Y - 1] === "white") movements.push([X, Y - 1]);
 
     if (movements.length) {
       setMoving([X, Y]);
@@ -52,21 +72,28 @@ export const Play = ({ setScreen }: IPlayProps) => {
     setMoving(undefined);
     setPossibleMovements(undefined);
     setPlayMap(newPlayMap);
+    checkWin(JSON.stringify(newPlayMap));
   };
 
   return (
     <div id="playScreen">
       <h1>Color Columns</h1>
+      <button id="back-button" onClick={() => setScreen("menu")}>
+        Go back
+      </button>
+      <Timer win={win} setLose={setLose} />
+      <InfoContainer win={win} lose={lose} />
+
       <div id="game-map-container">
         {playMap.map((column, X) => (
           <div className="column" key={`column-${X}`}>
             {column.map((tile, Y) => {
-              const isColouredTile = tile !== "white" && tile !== "gray";
+              const isColouredTile = playableColors.includes(tile);
               const isMovementPossible =
                 possibleMovements && possibleMovements.some(([posX, posY]) => posX === X && posY === Y);
 
-              const handleTile = () => !isMovementPossible && handleTileClick(X, Y);
-              const handleTileOverlap = () => isMovementPossible && handleMove(X, Y);
+              const handleTile = () => !(win || lose) && handleTileClick(X, Y);
+              const handleTileOverlap = () => !(win || lose) && isMovementPossible && handleMove(X, Y);
 
               return (
                 <div
@@ -83,7 +110,7 @@ export const Play = ({ setScreen }: IPlayProps) => {
                     onClick={handleTileOverlap}
                     onMouseUp={handleTileOverlap}
                     style={{
-                      opacity: isMovementPossible ? 0.5 : 0,
+                      opacity: isMovementPossible ? 0.3 : 0,
                       backgroundColor: moving && playMap[moving[0]][moving[1]],
                     }}
                   />
@@ -96,13 +123,3 @@ export const Play = ({ setScreen }: IPlayProps) => {
     </div>
   );
 };
-
-const colourMap = (): Color[][] => [
-  ["blue", "blue", "green", "red", "purple"],
-  ["red", "purple", "yellow", "blue", "blue"],
-  ["purple", "yellow", "purple", "purple", "yellow"],
-  ["yellow", "green", "blue", "yellow", "green"],
-  ["green", "red", "red", "green", "red"],
-  ["white", "white", "white", "white", "gray"],
-  ["white", "white", "white", "white", "gray"],
-];
