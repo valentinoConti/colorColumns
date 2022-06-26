@@ -17,7 +17,7 @@ export const Menu = ({ setScreen }: IMenuProps) => {
       </button>
 
       <button id="instructionsButton" className="menuButton" onClick={instructionsPressed}>
-        Instructions
+        How to play
       </button>
 
       <footer>Valentino Conti</footer>

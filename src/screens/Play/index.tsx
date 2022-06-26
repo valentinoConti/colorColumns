@@ -81,7 +81,7 @@ export const Play = ({ setScreen }: IPlayProps) => {
       <button id="back-button" onClick={() => setScreen("menu")}>
         Go back
       </button>
-      <Timer win={win} setLose={setLose} />
+      <Timer win={win} lose={lose} setLose={setLose} />
       <InfoContainer win={win} lose={lose} />
 
       <div id="game-map-container">

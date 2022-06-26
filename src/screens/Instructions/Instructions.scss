@@ -1,8 +1,41 @@
 #instructionsScreen {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  #rules {
+    display: flex;
+    flex-direction: column;
+
+    width: 75%;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 15px;
+
+    background-color: #252525;
+    text-align: center;
+
+    span {
+      margin-bottom: 20px;
+      color: white;
+      text-shadow: 2px 2px 2px black;
+      font-size: 24px;
+      text-align: left;
+
+      &:last-of-type {
+        margin-bottom: 4px;
+      }
+    }
+  }
+
+  h1:first-of-type {
+    margin-top: 40px;
+  }
+
   #back-button {
     position: absolute;
     left: 10px;
-    top: 10px;
+    bottom: 10px;
     width: 120px;
     height: 40px;
   }
