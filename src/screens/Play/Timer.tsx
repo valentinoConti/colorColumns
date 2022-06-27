@@ -1,24 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { playerHappy, playerMidHappy, playerWorried, playerSad, playerDead } from "../../../assets";
+import { processTime } from "../../utils";
 interface ITimerProps {
   setLose: (bool: boolean) => void;
   win: boolean;
   lose: boolean;
+  time: number;
+  setTime: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const Timer = ({ setLose, win, lose }: ITimerProps) => {
-  const [time, setTime] = useState(0);
+export const Timer = ({ setLose, win, lose, time, setTime }: ITimerProps) => {
   const [color, setColor] = useState("lime");
   const [faceSrc, setFaceSrc] = useState(playerHappy);
 
   const timeInterval = useRef<number>();
-
-  const processTime = (totalSeconds: number) => {
-    const minutes = Math.trunc(totalSeconds / 60);
-    const seconds = totalSeconds - minutes * 60;
-
-    return minutes < 8 ? `${minutes}:${seconds > 9 ? seconds : "0" + seconds}` : "💀💀";
-  };
 
   useEffect(() => {
     if (time === 211) {

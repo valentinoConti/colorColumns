@@ -21,6 +21,7 @@ export const Play = ({ setScreen, setGameId, config }: IPlayProps) => {
   const [possibleMovements, setPossibleMovements] = useState<Positions>();
   const [win, setWin] = useState(false);
   const [lose, setLose] = useState(false);
+  const [time, setTime] = useState(0);
 
   const checkWin = (stringMap) => stringMap === winningMap && setWin(true);
 
@@ -87,8 +88,8 @@ export const Play = ({ setScreen, setGameId, config }: IPlayProps) => {
       <button className="action-button" onClick={() => setGameId((gameId) => gameId + 1)}>
         Restart
       </button>
-      <Timer win={win} lose={lose} setLose={setLose} />
-      <InfoContainer design={config.design} win={win} lose={lose} />
+      <Timer win={win} lose={lose} setLose={setLose} time={time} setTime={setTime} />
+      <InfoContainer win={win} lose={lose} time={time} design={config.design} />
 
       <div id="game-map-container">
         {playMap.map((column, X) => (
@@ -115,7 +116,7 @@ export const Play = ({ setScreen, setGameId, config }: IPlayProps) => {
                     background:
                       config.design === "original"
                         ? tile
-                        : `radial-gradient(${tile}, ${tile === "white" ? "white" : "black"}, transparent)`,
+                        : `radial-gradient(${tile}, ${tile === "white" ? "white" : "rgba(0,0,0,0.65)"}, transparent)`,
                   }}
                 >
                   <div

@@ -8,12 +8,13 @@
     position: absolute;
     left: 10px;
     top: 10px;
-    width: 80px;
+    width: 88px;
     height: 40px;
     font-size: 16px;
+    white-space: nowrap;
 
     &:last-of-type {
-      left: 96px;
+      left: 104px;
     }
   }
 
@@ -86,6 +87,26 @@
         font-size: 22px;
       }
     }
+
+    div {
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      span {
+        font-size: 24px;
+        margin-right: 6px;
+      }
+      input {
+        margin-top: 2px;
+        font-size: 22px;
+        width: 220px;
+      }
+      button {
+        margin-left: 4px;
+        font-size: 20px;
+      }
+    }
+
   }
 
 }

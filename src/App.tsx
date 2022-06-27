@@ -3,6 +3,7 @@ import { Menu } from "./screens/Menu";
 import { Instructions } from "./screens/Instructions";
 import { Settings } from "./screens/Settings";
 import { Play } from "./screens/Play";
+import { LeaderBoard } from "./screens/LeaderBoard";
 import { IConfig } from "./utils";
 import "./App.scss";
 
@@ -35,6 +36,7 @@ export const App = () => {
       {screen === "menu" && <Menu setScreen={setScreen} />}
       {screen === "instructions" && <Instructions setScreen={setScreen} />}
       {screen === "settings" && config && <Settings config={config} setConfig={setConfig} setScreen={setScreen} />}
+      {screen === "leaderboard" && config && <LeaderBoard setScreen={setScreen} />}
       {screen === "play" && config && (
         <Play key={`game-${gameId}`} setGameId={setGameId} config={config} setScreen={setScreen} />
       )}

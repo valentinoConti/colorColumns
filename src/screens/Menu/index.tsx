@@ -8,6 +8,7 @@ export const Menu = ({ setScreen }: IMenuProps) => {
   const playPressed = () => setScreen("play");
   const instructionsPressed = () => setScreen("instructions");
   const settingsPressed = () => setScreen("settings");
+  const leaderboardPressed = () => setScreen("leaderboard");
 
   return (
     <div id="menuScreen">
@@ -19,6 +20,10 @@ export const Menu = ({ setScreen }: IMenuProps) => {
 
       <button className="menuButton" onClick={settingsPressed}>
         Settings
+      </button>
+
+      <button className="menuButton" onClick={leaderboardPressed}>
+        Leaderboard
       </button>
 
       <button className="menuButton" onClick={instructionsPressed}>

@@ -141,8 +141,21 @@ export const getWinningMap = (playMap: Color[][]) => {
   return JSON.stringify(winMap);
 };
 
+export const processTime = (totalSeconds: number) => {
+  const minutes = Math.trunc(totalSeconds / 60);
+  const seconds = totalSeconds - minutes * 60;
+
+  return minutes < 8 ? `${minutes}:${seconds > 9 ? seconds : "0" + seconds}` : "💀💀";
+};
+
 export interface IConfig {
   map: "original" | "random";
   design: "original" | "crazy";
   autoClick: boolean;
+}
+
+export interface ILeaderBoard {
+  winnerName: string;
+  time: number;
+  design: "crazy" | "original";
 }
