@@ -1,11 +1,20 @@
 #root {
   justify-content: center;
   display: flex;
+  height: 1500px;
+}
+
+html {
+  height: 1200px;
+  overflow: hidden;
 }
 
 #app-container {
   display: flex;
+  transform-origin: top center;
   position: relative;
+  position: fixed;
+  top: 0;
 
   width: 800px;
   height: 800px;

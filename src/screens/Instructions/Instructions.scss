@@ -1,13 +1,32 @@
+@keyframes opacityAnimation {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 #instructionsScreen {
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 
-  #rules {
+  #box {
     display: flex;
     flex-direction: column;
 
-    width: 75%;
+    width: 80%;
     border-radius: 8px;
     padding: 20px;
     margin-top: 15px;
@@ -26,17 +45,47 @@
         margin-bottom: 4px;
       }
     }
+
+    #center { text-align: center }
+
+    #images-container {
+      position: relative;
+      width: 100%;
+      height: 450px;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    img {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+
+      &.sorted {
+        animation: opacityAnimation 8s ease-in infinite;
+        z-index: 2;
+      }
+    }
   }
 
   h1:first-of-type {
     margin-top: 40px;
   }
 
-  #back-button {
+  button {
     position: absolute;
-    left: 10px;
-    bottom: 10px;
     width: 120px;
     height: 40px;
+    bottom: 10px;
+  }
+  
+  #next-button {
+    right: 10px;
+  }
+
+  #back-button {
+    left: 10px;
   }
 }
