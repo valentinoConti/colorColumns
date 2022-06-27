@@ -1,10 +1,10 @@
 import "./Instructions.scss";
 
-interface IInstructionProps {
+interface IInstructionsProps {
   setScreen: (screen: string) => void;
 }
 
-export const Instructions = ({ setScreen }: IInstructionProps) => {
+export const Instructions = ({ setScreen }: IInstructionsProps) => {
   const goBack = () => setScreen("menu");
 
   return (

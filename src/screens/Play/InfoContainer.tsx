@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 interface IInfoContainerProps {
   win: boolean;
   lose: boolean;
+  design: "crazy" | "original";
 }
 
-export const InfoContainer = ({ win, lose }: IInfoContainerProps) => {
+export const InfoContainer = ({ win, lose, design }: IInfoContainerProps) => {
   const [shouldShowContainer, setShouldShowContainer] = useState(false);
   const [shouldShowInformation, setShouldShowInformation] = useState(false);
 
@@ -20,6 +21,7 @@ export const InfoContainer = ({ win, lose }: IInfoContainerProps) => {
     <div
       id="info-container"
       style={{
+        background: design === "original" ? "white" : "linear-gradient(135deg, black, blue, purple, red, gold, green)",
         left: shouldShowContainer ? 100 : 390,
         right: shouldShowContainer ? 100 : 390,
         visibility: shouldShowContainer ? "visible" : "hidden",

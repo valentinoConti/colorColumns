@@ -4,12 +4,17 @@
   background-color: #252525;
   justify-content: center;
 
-  #back-button {
+  .action-button {
     position: absolute;
     left: 10px;
     top: 10px;
-    width: 120px;
+    width: 80px;
     height: 40px;
+    font-size: 16px;
+
+    &:last-of-type {
+      left: 96px;
+    }
   }
 
   #game-map-container {
@@ -39,6 +44,24 @@
   }
 }
 
+.crazy {
+  animation: gradient 15s ease infinite;
+  background: linear-gradient(45deg, blue, purple, red, gold, green);
+  background-size: 400% 400%;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 #info-container {
   display: flex;
   justify-content: center;
@@ -47,7 +70,6 @@
   position: absolute;
   top: 110px;
 
-  background-color: white;
   border-radius: 8px;
   height: 100px;
 

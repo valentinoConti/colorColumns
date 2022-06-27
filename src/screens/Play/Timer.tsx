@@ -7,7 +7,7 @@ interface ITimerProps {
 }
 
 export const Timer = ({ setLose, win, lose }: ITimerProps) => {
-  const [time, setTime] = useState(208);
+  const [time, setTime] = useState(0);
   const [color, setColor] = useState("lime");
   const [faceSrc, setFaceSrc] = useState(playerHappy);
 
@@ -17,7 +17,7 @@ export const Timer = ({ setLose, win, lose }: ITimerProps) => {
     const minutes = Math.trunc(totalSeconds / 60);
     const seconds = totalSeconds - minutes * 60;
 
-    return minutes < 10 ? `${minutes}:${seconds > 9 ? seconds : "0" + seconds}` : "💀💀";
+    return minutes < 8 ? `${minutes}:${seconds > 9 ? seconds : "0" + seconds}` : "💀💀";
   };
 
   useEffect(() => {

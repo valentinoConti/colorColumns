@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { InfoContainer } from "./InfoContainer";
 import { Timer } from "./Timer";
-import { getColourMap, winningMap } from "./utils";
+import { getColourMap, getRandomMap, IConfig, getWinningMap } from "../../utils";
 import "./Play.scss";
 
 type Position = number[];
@@ -9,11 +9,14 @@ type Positions = Position[];
 const playableColors = ["red", "green", "blue", "yellow", "purple"];
 
 interface IPlayProps {
-  setScreen: (screen: string) => void;
+  setScreen: React.Dispatch<React.SetStateAction<string>>;
+  setGameId: React.Dispatch<React.SetStateAction<number>>;
+  config: IConfig;
 }
 
-export const Play = ({ setScreen }: IPlayProps) => {
-  const [playMap, setPlayMap] = useState(getColourMap());
+export const Play = ({ setScreen, setGameId, config }: IPlayProps) => {
+  const [playMap, setPlayMap] = useState(config.map === "original" ? getColourMap() : getRandomMap());
+  const [winningMap] = useState(getWinningMap(playMap));
   const [moving, setMoving] = useState<Position>();
   const [possibleMovements, setPossibleMovements] = useState<Positions>();
   const [win, setWin] = useState(false);
@@ -76,13 +79,16 @@ export const Play = ({ setScreen }: IPlayProps) => {
   };
 
   return (
-    <div id="playScreen">
+    <div id="playScreen" className={`${config.design === "original" ? "" : "crazy"}`}>
       <h1>Color Columns</h1>
-      <button id="back-button" onClick={() => setScreen("menu")}>
+      <button className="action-button" onClick={() => setScreen("menu")}>
         Go back
       </button>
+      <button className="action-button" onClick={() => setGameId((gameId) => gameId + 1)}>
+        Restart
+      </button>
       <Timer win={win} lose={lose} setLose={setLose} />
-      <InfoContainer win={win} lose={lose} />
+      <InfoContainer design={config.design} win={win} lose={lose} />
 
       <div id="game-map-container">
         {playMap.map((column, X) => (
@@ -95,22 +101,29 @@ export const Play = ({ setScreen }: IPlayProps) => {
               const handleTile = () => !(win || lose) && handleTileClick(X, Y);
               const handleTileOverlap = () => !(win || lose) && isMovementPossible && handleMove(X, Y);
 
+              const overlapEvent: React.DOMAttributes<HTMLDivElement> = config.autoClick
+                ? { onMouseDown: handleTileOverlap }
+                : { onClick: handleTileOverlap };
+
               return (
                 <div
                   key={`tile-${X}-${Y}`}
                   className="tile"
                   onMouseDown={handleTile}
                   style={{
-                    backgroundColor: tile,
                     cursor: isColouredTile || isMovementPossible ? "pointer" : "default",
+                    background:
+                      config.design === "original"
+                        ? tile
+                        : `radial-gradient(${tile}, ${tile === "white" ? "white" : "black"}, transparent)`,
                   }}
                 >
                   <div
                     className="tile-overlap"
-                    onClick={handleTileOverlap}
+                    {...overlapEvent}
                     onMouseUp={handleTileOverlap}
                     style={{
-                      opacity: isMovementPossible ? 0.3 : 0,
+                      opacity: isMovementPossible ? (config.design === "original" ? 0.3 : 0.5) : 0,
                       backgroundColor: moving && playMap[moving[0]][moving[1]],
                     }}
                   />
