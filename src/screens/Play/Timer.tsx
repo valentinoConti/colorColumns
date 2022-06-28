@@ -13,7 +13,7 @@ export const Timer = ({ setLose, win, lose, time, setTime }: ITimerProps) => {
   const [color, setColor] = useState("lime");
   const [faceSrc, setFaceSrc] = useState(playerHappy);
 
-  const timeInterval = useRef<NodeJS.Timer>();
+  const timeInterval = useRef<number>();
 
   useEffect(() => {
     if (time === 211) {
@@ -39,7 +39,7 @@ export const Timer = ({ setLose, win, lose, time, setTime }: ITimerProps) => {
   }, [win, lose]);
 
   useEffect(() => {
-    timeInterval.current = setInterval(() => setTime((time) => time + 1), 1000);
+    timeInterval.current = window.setInterval(() => setTime((time) => time + 1), 1000);
     return () => clearInterval(timeInterval.current);
   }, []);
 

@@ -6,6 +6,6 @@ This development was born because of a challenge for the RandLabs company. It wa
 
 It has a 90%+ coverage of unit tests made with react-testing-library and Jest.
 
-It's hosted on a github page [available to play here](https://valentinoconti.github.io/colorColumns/). Enjoy!
+It's hosted on a github page and its [available to play here](https://valentinoconti.github.io/colorColumns/). Enjoy!
 
 ![](preview.gif)
