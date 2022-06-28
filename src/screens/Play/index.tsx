@@ -91,9 +91,9 @@ export const Play = ({ setScreen, setGameId, config }: IPlayProps) => {
       <Timer win={win} lose={lose} setLose={setLose} time={time} setTime={setTime} />
       <InfoContainer win={win} lose={lose} time={time} design={config.design} />
 
-      <div id="game-map-container">
+      <div id="game-map-container" data-testid="game-map">
         {playMap.map((column, X) => (
-          <div className="column" key={`column-${X}`}>
+          <div className="column" data-testid={`column-${X}`} key={`column-${X}`}>
             {column.map((tile, Y) => {
               const isColouredTile = playableColors.includes(tile);
               const isMovementPossible =
@@ -109,6 +109,7 @@ export const Play = ({ setScreen, setGameId, config }: IPlayProps) => {
               return (
                 <div
                   key={`tile-${X}-${Y}`}
+                  data-testid={`tile-${X}-${Y}`}
                   className="tile"
                   onMouseDown={handleTile}
                   style={{
@@ -121,6 +122,7 @@ export const Play = ({ setScreen, setGameId, config }: IPlayProps) => {
                 >
                   <div
                     className="tile-overlap"
+                    data-testid={`tile-overlap-${X}-${Y}`}
                     {...overlapEvent}
                     onMouseUp={handleTileOverlap}
                     style={{

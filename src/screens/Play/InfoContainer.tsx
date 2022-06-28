@@ -16,8 +16,6 @@ export const InfoContainer = ({ win, lose, time, design }: IInfoContainerProps) 
   const [winnerName, setWinnerName] = useState("");
 
   const handleSubmitWinner = () => {
-    console.log("winner!", winnerName, "in", time);
-
     const item = { winnerName, time, design };
     const currentTopTen = localStorage.getItem("color-columns-top-ten");
 
@@ -58,7 +56,7 @@ export const InfoContainer = ({ win, lose, time, design }: IInfoContainerProps) 
         visibility: shouldShowContainer ? "visible" : "hidden",
       }}
     >
-      <div id="info" style={{ opacity: shouldShowInformation ? 1 : 0 }}>
+      <div id="info" data-testid="win-info" style={{ opacity: shouldShowInformation ? 1 : 0 }}>
         {lose ? (
           <>
             <span>💀 YOU LOSE 💀</span>
@@ -76,6 +74,7 @@ export const InfoContainer = ({ win, lose, time, design }: IInfoContainerProps) 
                 <span>Put your name:</span>
                 <input
                   type="text"
+                  data-testid="winner-name-input"
                   id="name"
                   value={winnerName}
                   onChange={(ev) => setWinnerName(ev.target.value.substring(0, 16))}

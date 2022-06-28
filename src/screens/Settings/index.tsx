@@ -22,11 +22,19 @@ export const Settings = ({ setScreen, config, setConfig }: ISettingsProps) => {
         <div className="setting-item-options">
           <div className="option">
             <span>Original</span>
-            <CheckBox on={config.map === "original"} onClick={() => setConfig({ ...config, map: "original" })} />
+            <CheckBox
+              testId="map-original"
+              on={config.map === "original"}
+              onClick={() => setConfig({ ...config, map: "original" })}
+            />
           </div>
           <div className="option">
             <span>Random</span>
-            <CheckBox on={config.map === "random"} onClick={() => setConfig({ ...config, map: "random" })} />
+            <CheckBox
+              testId="map-random"
+              on={config.map === "random"}
+              onClick={() => setConfig({ ...config, map: "random" })}
+            />
           </div>
         </div>
 
@@ -41,11 +49,19 @@ export const Settings = ({ setScreen, config, setConfig }: ISettingsProps) => {
         <div className="setting-item-options">
           <div className="option">
             <span>Original</span>
-            <CheckBox on={config.design === "original"} onClick={() => setConfig({ ...config, design: "original" })} />
+            <CheckBox
+              testId="design-original"
+              on={config.design === "original"}
+              onClick={() => setConfig({ ...config, design: "original" })}
+            />
           </div>
           <div className="option">
             <span>Crazy</span>
-            <CheckBox on={config.design === "crazy"} onClick={() => setConfig({ ...config, design: "crazy" })} />
+            <CheckBox
+              testId="design-crazy"
+              on={config.design === "crazy"}
+              onClick={() => setConfig({ ...config, design: "crazy" })}
+            />
           </div>
         </div>
 
@@ -60,11 +76,19 @@ export const Settings = ({ setScreen, config, setConfig }: ISettingsProps) => {
         <div className="setting-item-options">
           <div className="option">
             <span>OFF</span>
-            <CheckBox on={!config.autoClick} onClick={() => setConfig({ ...config, autoClick: false })} />
+            <CheckBox
+              testId="autoclick-off"
+              on={!config.autoClick}
+              onClick={() => setConfig({ ...config, autoClick: false })}
+            />
           </div>
           <div className="option">
             <span>ON</span>
-            <CheckBox on={config.autoClick} onClick={() => setConfig({ ...config, autoClick: true })} />
+            <CheckBox
+              testId="autoclick-on"
+              on={config.autoClick}
+              onClick={() => setConfig({ ...config, autoClick: true })}
+            />
           </div>
         </div>
 

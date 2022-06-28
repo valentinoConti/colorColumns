@@ -13,7 +13,7 @@ export const Timer = ({ setLose, win, lose, time, setTime }: ITimerProps) => {
   const [color, setColor] = useState("lime");
   const [faceSrc, setFaceSrc] = useState(playerHappy);
 
-  const timeInterval = useRef<number>();
+  const timeInterval = useRef<NodeJS.Timer>();
 
   useEffect(() => {
     if (time === 211) {
@@ -46,7 +46,9 @@ export const Timer = ({ setLose, win, lose, time, setTime }: ITimerProps) => {
   return (
     <div id="timer" style={{ transform: `scale(${win || lose ? 1.4 : 1})` }}>
       <img src={faceSrc} id="player-face" />
-      <span style={{ color: color }}>{processTime(time)}</span>
+      <span data-testid="time" style={{ color: color }}>
+        {processTime(time)}
+      </span>
     </div>
   );
 };
